@@ -1,0 +1,26 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 33  // This is the SDK version you're compiling against
+
+    defaultConfig {
+        applicationId "com.assistant.sol"  // Replace with your package name
+        minSdkVersion 21  // The lowest version your app will support
+        targetSdkVersion 33  // The version your app targets
+        versionCode 1  // App version number
+        versionName "1.0"  // App version name
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false  // Disable code minification for release builds
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'  // Default Proguard config
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.3.1'  // Support for backward compatibility
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'  // For layouts
+    implementation 'com.google.android.material:material:1.4.0'  // Material Design components
+}
