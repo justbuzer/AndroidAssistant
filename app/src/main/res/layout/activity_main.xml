@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- TextView to display spoken results or feedback -->
+    <TextView
+        android:id="@+id/outputTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Waiting for your command..."
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentTop="true" />
+
+    <!-- Button to start listening -->
+    <Button
+        android:id="@+id/startListeningButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Listening"
+        android:layout_below="@id/outputTextView"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
