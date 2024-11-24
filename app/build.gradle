@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 33  // This is the SDK version you're compiling against
+    compileSdkVersion 34  // This is the SDK version you're compiling against
 
     defaultConfig {
         applicationId "com.assistant.sol"  // Replace with your package name
         minSdkVersion 21  // The lowest version your app will support
-        targetSdkVersion 33  // The version your app targets
+        targetSdkVersion 34  // The version your app targets
         versionCode 1  // App version number
         versionName "1.0"  // App version name
     }
