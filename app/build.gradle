@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
+    namespace "com.assistant.sol"
+    
     compileSdkVersion 34  // This is the SDK version you're compiling against
 
     defaultConfig {
