@@ -10,11 +10,13 @@ import android.speech.SpeechRecognizer
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.text.DateFormat
 import java.util.Date
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,24 +31,32 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val startListeningButton: Button = findViewById(R.id.startListeningButton)
-        outputTextView = findViewById(R.id.outputTextView) // TextView for displaying output
+        outputTextView = findViewById(R.id.outputTextView)
 
-        // Permission request logic
+        // Check for permissions and request if not granted
         if (ContextCompat.checkSelfPermission(
                 this, Manifest.permission.RECORD_AUDIO
             ) != PackageManager.PERMISSION_GRANTED
         ) {
+            // Request permission if not granted
             ActivityCompat.requestPermissions(
                 this, arrayOf(Manifest.permission.RECORD_AUDIO), 1
             )
-        }
-
-        startListeningButton.setOnClickListener {
-            startListening()
+        } else {
+            // Permission granted, you can start the speech recognizer
+            startListeningButton.setOnClickListener {
+                Log.d("MainActivity", "Button clicked, starting listening...")
+                startListening()
+            }
         }
     }
 
     private fun startListening() {
+        if (speechRecognizer == null) {
+            Toast.makeText(applicationContext, "SpeechRecognizer not available", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak now...")
@@ -86,6 +96,20 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    // Permission result handler
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show()
+                // Once permission is granted, allow listening
+                startListening()
+            } else {
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun getErrorText(errorCode: Int): String {
         return when (errorCode) {
             SpeechRecognizer.ERROR_NETWORK -> "Network error, please try again."
@@ -119,6 +143,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        speechRecognizer.destroy() // Release the SpeechRecognizer to avoid memory leaks
+        speechRecognizer.destroy() // Clean up resources
     }
 }
