@@ -3,13 +3,13 @@ apply plugin: 'com.android.application'
 android {
     namespace "com.assistant.sol"
 
-    compileSdkVersion 29  // This is the SDK version you're compiling against
-buildToolsVersion "29.0.0"
+    compileSdkVersion 33  // This is the SDK version you're compiling against
+    //buildToolsVersion "29.0.0" // test. remove/comment if error
 
     defaultConfig {
         applicationId "com.assistant.sol"  // Replace with your package name
         minSdkVersion 25  // The lowest version your app will support
-        targetSdkVersion 29  // The version your app targets
+        targetSdkVersion 33  // The version your app targets
         versionCode 1  // App version number
         versionName "1.0"  // App version name
     }
