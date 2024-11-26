@@ -1,0 +1,2 @@
+-keep class android.speech.** { *; }
+-keep class com.assistant.sol.** { *; }

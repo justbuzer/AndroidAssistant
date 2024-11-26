@@ -7,7 +7,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="SOL Assistant"
-        android:theme="@style/Theme.SOLAssistant">
+        android:theme="@style/Theme.SOLAssistant"
+        android.name="androidx.multidex.MultiDexApplication">
 
         <activity
             android:name="com.assistant.sol.MainActivity"
